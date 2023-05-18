@@ -9,12 +9,13 @@
 /*   Updated: 2023/03/13 21:27:53 by bosekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 int	ft_isalpha(int c)
 {
-	if (letter >= 65 && letter <= 90)
+	if (c >= 65 && c <= 90)
 		return (1);
-	else if (letter >= 97 && letter <= 122)
+	else if (c >= 97 && c <= 122)
 		return (1);
 	return (0);
 }

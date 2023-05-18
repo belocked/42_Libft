@@ -10,25 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdlib.h>
+#include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*result;
 	size_t	left;
 	size_t	right;
-	size_t	result_idx;
+	size_t	r_idx;
 
 	left = 0;
 	right = ft_strlen(s1) - 1;
-	result_idx = 0;
+	r_idx = 0;
 	while (s1[left] && ft_strchr(set, s1[left]))
 		left = left + 1;
 	while (left < right && ft_strchr(set, s1[right]))
 		right = right - 1;
-	result = (char *)malloc(sizeof(char const *) * (right - left + 1));
+	result = (char *)malloc(sizeof(char) * (right - left + 1));
 	if (result == NULL)
 		return (NULL);
 	while (left < right)
-	
+	{
+		result[r_idx] = s1[left];
+		left = left + 1;
+		r_idx = r_idx + 1;
+	}
+	return (result);
 }

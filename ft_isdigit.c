@@ -9,10 +9,11 @@
 /*   Updated: 2023/03/13 21:29:58 by bosekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {
-	if (letter >= 48 && letter <= 57)
+	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }

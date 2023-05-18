@@ -9,16 +9,7 @@
 /*   Updated: 2023/03/19 00:34:18 by bosekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-size_t	ft_tmp_strlen(char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len = len + 1;
-	return (len);
-}
+#include "libft.h"
 
 size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 {
@@ -26,8 +17,8 @@ size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 	size_t	srclen;
 	size_t	idx;
 
-	dstlen = ft_tmp_strlen(dst);
-	srclen = ft_tmp_strlen(src);
+	dstlen = ft_strlen(dst);
+	srclen = ft_strlen(src);
 	idx = 0;
 	if (dstsize <= dstlen)
 		return (dstsize + srclen);
