@@ -1,56 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bosekim <bosekim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 11:55:21 by bosekim           #+#    #+#             */
-/*   Updated: 2023/05/23 01:14:55 by bosekim          ###   ########.fr       */
+/*   Created: 2023/05/23 01:55:31 by bosekim           #+#    #+#             */
+/*   Updated: 2023/05/23 01:55:33 by bosekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_n_len(int n)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	length;
+	size_t			len;
+	char			*result;
+	unsigned int	idx;
 
-	length = 0;
-	if (n <= 0)
-		length = 1;
-	while (n != 0)
-	{
-		n = n / 10;
-		length = length + 1;
-	}
-	return (length);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*result;
-	int		len;
-
-	if (n == -2147483647)
-		return (ft_strdup("-2147483647"));
-	len = ft_n_len(n);
+	idx = 0;
+	len = ft_strlen((char *)s);
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (result == NULL)
 		return (NULL);
-	result[len] = 0;
-	if (n < 0)
+	while (idx < len)
 	{
-		result[0] = '-';
-		n = n * -1;
+		result[idx] = f(idx, s[idx]);
+		idx = idx + 1;
 	}
-	else if (n == 0)
-		result[0] = '0';
-	while (n)
-	{
-		len--;
-		result[len] = n % 10 + '0';
-		n = n / 10;
-	}
+	result[idx] = 0;
 	return (result);
 }
