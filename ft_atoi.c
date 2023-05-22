@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 #include "libft.h"
 
+int	ft_check_white_space(char letter)
+{
+	if (letter != ' ' && letter != '\n' && letter != '\t'
+		&& letter != '\v' && letter != '\f' && letter != '\r')
+		return (0);
+	return (1);
+}
+
 int	ft_atoi(const char *str)
 {
 	long long int	idx;
@@ -20,12 +28,13 @@ int	ft_atoi(const char *str)
 	idx = 0;
 	result = 0;
 	sign = 1;
-	while (*(str + idx) == '\t' || *(str + idx) == ' ')
+	while (ft_check_white_space(*(str + idx)))
 		idx = idx + 1;
-	if (*(str + idx) == '-')
+	if (*(str + idx) == '-' || *(str + idx) == '+')
 	{
+		if (*(str + idx) == '-')
+			sign = -1;
 		idx = idx + 1;
-		sign = -1;
 	}
 	while (*(str + idx) >= '0' && *(str + idx) <= '9')
 	{

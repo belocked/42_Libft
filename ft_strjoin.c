@@ -15,13 +15,25 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*result;
-	size_t	len;
+	size_t	idx1;
+	size_t	idx2;
 
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	result = (char *)malloc(sizeof(char) * len);
+	idx1 = 0;
+	idx2 = 0;
+	result = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (result == NULL)
 		return ((char *) NULL);
-	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
-	ft_strlcat(result, s2, ft_strlen(s2));
+	while (idx1 < ft_strlen(s1))
+	{
+		result[idx1] = s1[idx1];
+		idx1 = idx1 + 1;
+	}
+	while (idx2 < ft_strlen(s2))
+	{
+		result[idx1] = s2[idx2];
+		idx1 = idx1 + 1;
+		idx2 = idx2 + 1;
+	}
+	result[idx1] = 0;
 	return (result);
 }

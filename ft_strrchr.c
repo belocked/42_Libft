@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bosekim <bosekim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 22:42:12 by bosekim           #+#    #+#             */
-/*   Updated: 2023/03/18 23:13:59 by bosekim          ###   ########.fr       */
+/*   Created: 2023/05/23 05:14:27 by bosekim           #+#    #+#             */
+/*   Updated: 2023/05/23 05:14:30 by bosekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	srcsize;
-	size_t	idx;
+	size_t	s_len;
 
-	srcsize = 0;
-	idx = 0;
-	while (*(src + srcsize))
-		srcsize = srcsize + 1;
-	if (dstsize == 0)
-		return (srcsize);
-	while (src[idx] && idx + 1 < dstsize)
+	s_len = ft_strlen(s);
+	while (s_len)
 	{
-		dst[idx] = src[idx];
-		idx = idx + 1;
+		if (s[s_len] == c)
+			return ((char *) &(s[s_len]));
+		s_len = s_len - 1;
 	}
-	dst[idx] = '\0';
-	return (srcsize);
+	return (NULL);
 }
