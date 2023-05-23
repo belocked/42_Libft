@@ -12,7 +12,52 @@
 
 #include "libft.h"
 
+void	make_num(int flag, int n, int nb, int fd)
+{
+	char	print_num[13];
+	int		digit;
+
+	digit = n;
+	if (flag == 0)
+	{
+		digit = digit + 1;
+		print_num[0] = '-';
+		while (n >= 1)
+		{
+			print_num[n] = '0' - nb % 10;
+			nb = nb / 10;
+			n = n - 1;
+		}
+	}
+	else
+	{
+		while (n >= 1)
+		{
+			print_num[n - 1] = '0' + nb % 10;
+			nb = nb / 10;
+			n = n - 1;
+		}
+	}
+	write (fd, print_num, digit);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	ft_putstr_fd(ft_itoa(n), fd);
+	int	nb;
+	int	flag;
+	int	cp_nb;
+
+	flag = 1;
+	nb = 0;
+	cp_nb = n;
+	while (cp_nb != 0)
+	{
+		cp_nb = cp_nb / 10;
+		nb = nb + 1;
+	}
+	if (n < 0)
+		flag = 0;
+	if (n == 0)
+		nb = 1;
+	make_num(flag, nb, n, fd);
 }
