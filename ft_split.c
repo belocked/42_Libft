@@ -12,102 +12,81 @@
 
 #include "libft.h"
 
-char	**ft_split_aloc_arr(char const *s, char c)
+static int	ft_word_count(char const *s, char c)
 {
-	char	**result;
-	size_t	s_idx;
-	size_t	w_cnt;
+	int	i;
+	int	count;
 
-	s_idx = 0;
-	w_cnt = 0;
-	while (s[s_idx])
+	i = 0;
+	count = 0;
+	while (s[i])
 	{
-		if (s[s_idx] == c)
-			w_cnt = w_cnt + 1;
-		s_idx = s_idx + 1;
+		if (s[i] == c)
+			i = i + 1;
+		else
+		{
+			count = count + 1;
+			while (s[i] && s[i] != c)
+				i = i + 1;
+		}
 	}
-	result = (char **)malloc(sizeof(char *) * (w_cnt + 2));
-	if (result == NULL)
-		return (NULL);
+	return (count);
+}
+
+static char	*ft_word_make(char *word, char const *s, int flag, int bias)
+{
+	int	i;
+
+	i = 0;
+	while (bias > 0)
+	{
+		word[i] = s[flag - bias];
+		i = i + 1;
+		bias = bias - 1;
+	}
+	word[i] = 0;
+	return (word);
+}
+
+static char	**ft_word_split(char **result, char const *s, char c, int wc)
+{
+	int	i;
+	int	j;
+	int	bias;
+
+	i = 0;
+	j = 0 ;
+	while (s[j] && i < wc)
+	{
+		bias = 0;
+		while (s[j] && s[j] == c)
+			j = j + 1;
+		while (s[j] && s[j] != c)
+		{
+			j = j + 1;
+			bias = bias + 1;
+		}
+		result[i] = (char *)malloc(sizeof(char) * (bias + 1));
+		if (!result[i])
+			return (NULL);
+		ft_word_make (result[i], s, j, bias);
+		i = i + 1;
+	}
+	result[i] = 0;
 	return (result);
 }
 
 char	**ft_split(char const *s, char c)
 {
+	int		wc;
 	char	**result;
 
-	result = ft_split_aloc_arr(s, c);
-	if (result == NULL)
-		return (NULL);
-	if ()     
+	if (s == 0)
+		return (0);
+	wc = ft_word_count(s, c);
+	result = (char **)malloc(sizeof(char *) * (wc + 1));
+	if (!result)
+		return (0);
+	ft_word_split (result, s, c, wc);
+	return (result);
 }
-
-/*
-unsigned int	word_num(char const *s, char c)
-{
-	unsigned int	num;
-	int				i;
-
-	i = 0;
-	num = 0;
-	while (s[i] && s[i] == c)
-		++i;
-	while (s[i])
-	{
-		while (s[i] && s[i] != c)
-			++i;
-		while (s[i] && s[i] == c)
-			++i;
-		++num;
-	}
-	return (num);
-}
-
-char			*set(char *ret, char *start, size_t size)
-{
-	if (!(ret = (char *)malloc(size)))
-		return (char *)0;
-	ft_strlcpy(ret, start, size);
-	return (ret);
-}
-
-static char		**memfree(char **ret)
-{
-	size_t	i;
-
-	i = 0;
-	while (ret[i])
-	{
-		free(ret[i]);
-		i++;
-	}
-	free(ret);
-	return ((char **)NULL);
-}
-
-char			**ft_split(char const *str, char c)
-{
-	char			**ret;
-	unsigned int	w_num;
-	unsigned int	i;
-	char			*start;
-
-	i = 0;
-	w_num = word_num(str, c);
-	if (!(ret = (char **)malloc(sizeof(char *) * (w_num + 1))))
-		return (char **)0;
-	while (i < w_num)
-	{
-		while (*str && *str == c)
-			++str;
-		start = (char *)str;
-		while (*str && *str != c)
-			++str;
-		if (!(ret[i] = set(ret[i], start, str - start + 1)))
-			return (memfree(ret));
-		++i;
-	}
-	ret[i] = (char *)0;
-	return (ret);
-}
-*/

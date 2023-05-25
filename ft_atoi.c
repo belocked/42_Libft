@@ -6,12 +6,12 @@
 /*   By: bosekim <bosekim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 02:25:09 by bosekim           #+#    #+#             */
-/*   Updated: 2023/03/29 03:14:10 by bosekim          ###   ########.fr       */
+/*   Updated: 2023/05/24 22:20:59 by bosekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_check_white_space(char letter)
+static int	ft_check_white_space(char letter)
 {
 	if (letter != ' ' && letter != '\n' && letter != '\t'
 		&& letter != '\v' && letter != '\f' && letter != '\r')

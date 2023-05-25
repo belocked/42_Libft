@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	make_num(int flag, int n, int nb, int fd)
+static void	ft_make_num(int flag, int n, int nb, int fd)
 {
 	char	print_num[13];
 	int		digit;
@@ -59,5 +59,5 @@ void	ft_putnbr_fd(int n, int fd)
 		flag = 0;
 	if (n == 0)
 		nb = 1;
-	make_num(flag, nb, n, fd);
+	ft_make_num(flag, nb, n, fd);
 }

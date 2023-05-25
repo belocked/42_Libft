@@ -6,19 +6,15 @@
 /*   By: bosekim <bosekim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 03:15:21 by bosekim           #+#    #+#             */
-/*   Updated: 2023/03/29 05:39:28 by bosekim          ###   ########.fr       */
+/*   Updated: 2023/05/24 11:02:15 by bosekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	total;
-	size_t	idx;
 	void	*result;
 
-	idx = 0;
-	total = count * size;
 	if (count == 0 || size == 0)
 	{
 		count = 1;
