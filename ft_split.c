@@ -33,29 +33,30 @@ static int	ft_word_count(char const *s, char c)
 	return (count);
 }
 
-char	*set(char *ret, char *start, size_t size)
+static char	*ft_word_make(char *result, char *start, size_t size)
 {
-	if (!(ret = (char *)malloc(size)))
-		return (char *)0;
-	ft_strlcpy(ret, start, size);
-	return (ret);
+	result = (char *)malloc(size);
+	if (result == NULL)
+		return (NULL);
+	ft_strlcpy(result, start, size);
+	return (result);
 }
 
-static char		**memfree(char **ret)
+static char	**ft_word_free(char **result)
 {
 	size_t	i;
 
 	i = 0;
-	while (ret[i])
+	while (result[i])
 	{
-		free(ret[i]);
-		i++;
+		free(result[i]);
+		i = i + 1;
 	}
-	free(ret);
-	return ((char **)NULL);
+	free(result);
+	return (NULL);
 }
 
-char			**ft_split(char const *str, char c)
+char	**ft_split(char const *str, char c)
 {
 	char	**result;
 	char	*start;
@@ -65,7 +66,7 @@ char			**ft_split(char const *str, char c)
 	i = 0;
 	wc = ft_word_count(str, c);
 	result = (char **)malloc(sizeof(char *) * (wc + 1));
-	if(!result)
+	if (result == NULL)
 		return (NULL);
 	while (i < wc)
 	{
@@ -73,10 +74,11 @@ char			**ft_split(char const *str, char c)
 			str = str + 1;
 		start = (char *)str;
 		while (*str && *str != c)
-			++str;
-		if (!(result[i] = set(result[i], start, str - start + 1)))
-			return (memfree(result));
-		++i;
+			str = str + 1;
+		result[i] = ft_word_make(result[i], start, str - start + 1);
+		if (result[i] == NULL)
+			return (ft_word_free(result));
+		i = i + 1;
 	}
 	result[i] = 0;
 	return (result);
